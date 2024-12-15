@@ -8,7 +8,7 @@ import {IniciSessioComponent} from './pagines/inici-sessio/inici-sessio.componen
 import {RegistreComponent} from './pagines/registre/registre.component';
 import {IniciComponent} from './pagines/inici/inici.component';
 
-export const routes: Routes = [{ path: '', component: IniciComponent },
+export const routes: Routes = [{ path: '',redirectTo: 'inici',  pathMatch: 'full' },
   {path: 'inici', component: IniciComponent},
   {path: 'cataleg', component: CatalegComponent},
   {path: 'cataleg/producte/:id', component: CatalegProducteComponent},
