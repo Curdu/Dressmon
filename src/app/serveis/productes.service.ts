@@ -12,9 +12,6 @@ export class ProductesService {
     this.productes = [];
     this.generateProductes();
 
-
-
-
   }
 
   private generateProductes(): void {
@@ -32,6 +29,9 @@ export class ProductesService {
       }
     }
     return categories;
+  }
+  getProductesByCategoria(categoria: string): Producte[] {
+    return this.productes.filter((producte) => producte.categoria === categoria);
   }
   getProducteById(id: number): Producte | undefined {
     return this.productes.find((producte) => producte.id === id);
