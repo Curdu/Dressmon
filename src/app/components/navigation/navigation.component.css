@@ -1,0 +1,78 @@
+nav{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#apartats{
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  background-color: white;
+}
+.seccio {
+  height: 5rem;
+  width: 20%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.15s ease;
+  font-size: 17px;
+  font-family: Consolas, Monaco, monospace;
+  text-decoration: none;
+  color: black;
+}
+#inici:hover{
+  background-color: lightgray;
+  color: white;
+}
+#cataleg:hover{
+  background-color: #dd340d;
+  color: white;
+
+}
+#condicions:hover{
+  background-color: #dfb72e;
+  color: white;
+
+}
+#sessio:hover{
+  background-color: #2fa3d2;
+  color: white;
+
+}
+#contacte:hover{
+  background-color: #4caa5a;
+  color: white;
+
+}
+#linies{
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+.linia{
+  width: 20%;
+  height: 0.5rem;
+  background-color: lightblue;
+}
+.primera{
+  border-bottom-left-radius: 1rem;
+}
+.ultima{
+  border-bottom-right-radius: 1rem;
+}
+#liniaInici{
+  background-color: lightgray;
+}
+#liniaCataleg{
+  background-color: #dd340d;
+}
+#liniaCondicions{
+  background-color: #dfb72e;
+}
+#liniaSessio{
+  background-color: #2fa3d2;
+}
+#liniaContacte{
+  background-color: #4caa5a;
+}
