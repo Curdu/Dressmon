@@ -76,5 +76,14 @@ a:hover{
   display: flex;
   flex-direction: column;
 }
+#checks div{
+  width: 100%;
+}
+button{
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  background-color: lightgreen;
+}
 
 
