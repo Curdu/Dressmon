@@ -1,0 +1,80 @@
+footer{
+  background-color: #1f1f1f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#contenidor{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55%;
+  margin-top: 3rem;
+  flex-direction: column;
+}
+h2{
+  font-weight: 1000;
+  margin: 0;
+}
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+form div{
+  width: 48%;
+}
+#contenidorFormulari{
+  width: 100%;
+}
+#pais{
+  width: 49%;
+}
+#datNaix{
+  width: 49%;
+}
+#email{
+  width: 100%;
+}
+#pagines{
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 1rem;
+  border-right: solid 3px black;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover{
+  text-decoration: underline;
+  text-decoration-color: white ;
+}
+#contenidorSeccions {
+  display: flex;
+  flex-direction: row;
+}
+#contenidorSeccions h2{
+  margin: 0;
+}
+#xarxesSocials{
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  column-gap: 1rem;
+
+}
+#checks{
+  display: flex;
+  flex-direction: column;
+}
+
+
