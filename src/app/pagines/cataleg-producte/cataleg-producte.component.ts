@@ -27,7 +27,11 @@ export class CatalegProducteComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.producte = this.productesServeis.getProducteById(id)!;
     this.textHTML.innerText = this.producte.toString();
+    this.carregarImatge()
+  }
 
+  carregarImatge(){
+    document.getElementById("imatge")!.style.backgroundImage = 'url(' + this.producte.imageUrl + ')';
   }
 
 
