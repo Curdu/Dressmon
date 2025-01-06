@@ -1,6 +1,6 @@
 nav{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 #apartats{
@@ -75,4 +75,16 @@ nav{
 }
 #liniaContacte{
   background-color: #4caa5a;
+}
+#contenidor{
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#cistella{
+  width: 3rem;
+  height: 3rem;
+  background-image: url("/assets/cistella.png");
+  background-size: cover;
 }
