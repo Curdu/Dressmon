@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&display=swap');
+
+
+#contenidorIniciSessio{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.jersey-10-regular {
+  font-family: "Jersey 10", serif;
+  font-style: normal;
+}
+h1{
+  font-size: 3rem;
+}
+#formulariIniciSessio{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 2rem 0;
+}

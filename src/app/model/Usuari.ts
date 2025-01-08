@@ -14,7 +14,7 @@ export class Usuari{
   }
 
    equals(other: Usuari): boolean {
-    return this.nom == other.nom && this.correu == other.correu;
+    return this.correu === other.correu;
   }
 
 }

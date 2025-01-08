@@ -1,1 +1,17 @@
-<p>inici-sessio works!</p>
+<div id="contenidorIniciSessio">
+  <h1 class="jersey-10-regular">Inici de sessió</h1>
+  <form action="" id="formulariIniciSessio">
+    <label for="correu">Correu elèctronic</label>
+    <input type="email" name="email" id="correu" [(ngModel)]="correu">
+
+    <label for="correu">Contrasenya</label>
+    <input type="password" name="passwd" id="passwd" [(ngModel)]="passwd">
+
+    <input type="button" value="Iniciar Sessió" (click)="iniciSessio()">
+
+  </form>
+
+  <a href="/registre">No tens cap compte?</a>
+
+
+</div>
