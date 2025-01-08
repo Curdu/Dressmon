@@ -13,5 +13,8 @@ export class Usuari{
     this.cistella = new Map<Producte, number>();
   }
 
+   equals(other: Usuari): boolean {
+    return this.nom == other.nom && this.correu == other.correu;
+  }
 
 }
