@@ -18,6 +18,7 @@ export class CatalegProducteComponent implements OnInit {
   producte!: Producte;
   imatgeURL: string;
   midaSeleccionada: string;
+  quantitat: number;
 
 
   constructor(productesServei: ProductesService, route: ActivatedRoute) {
@@ -27,11 +28,13 @@ export class CatalegProducteComponent implements OnInit {
     this.producte = this.productesServeis.getProducteById(id)!;
     this.imatgeURL = this.producte.imageUrl
     this.midaSeleccionada = this.producte.mides[0];
+    this.quantitat = 1;
 
   }
 
   ngOnInit():void {
     this.textHTML = document.getElementById('text')!;
+
     this.textHTML.classList.add('M');
     let midesHTML = document.getElementsByClassName('mida')
     for (let midesHTMLElement of midesHTML) {

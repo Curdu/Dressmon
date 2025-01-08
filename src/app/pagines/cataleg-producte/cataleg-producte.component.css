@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
 img{
   height: 600px;
   width: 600px;
@@ -10,6 +11,7 @@ img{
   display: flex;
   flex-direction: row;
   column-gap: 2%;
+
 }
 #nomProducte{
   font-family: "Jersey 10", serif;
@@ -24,12 +26,16 @@ img{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 3rem;
 }
 
 #imatge{
   width: 50%;
   height: 50%;
-
+  border: 2px black solid;
+  box-shadow: #1f1f1f 10px 10px 10px;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 #informacioProducte{
   width: 49%;
@@ -55,4 +61,52 @@ td{
 }
 .seleccionada{
   background-color: red;
+}
+#preuProducte{
+  font-family: "Signika Negative", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+#formulariQuantitat{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#quantitat{
+  width: 20%;
+  font-size: 2rem;
+  border: 1px solid #ffd233;
+
+}
+#quantitat::-webkit-inner-spin-button,#quantitat::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+#restarBtn, #sumarBtn{
+  cursor: pointer;
+  user-select: none;
+  padding: 1rem;
+  background-color: #ffd233;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+#restarBtn:hover,#sumarBtn:hover{
+  background-color: #ffd757;
+}
+#restarBtn{
+  border-bottom-left-radius: 0.7rem;
+  border-top-left-radius: 0.7rem;
+}
+#sumarBtn{
+  border-bottom-right-radius: 0.7rem;
+  border-top-right-radius: 0.7rem;
+}
+#afegirProducte{
+  color: #ffffff;
+  padding: 1.2rem;
+  background-color: #ffd233;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid #a68b23;
+  cursor: pointer;
 }

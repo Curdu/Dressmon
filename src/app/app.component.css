@@ -1,6 +1,12 @@
+#patroBlanc{
+  background-color: white;
+  background-image: url("/assets/container_bg.png");
+  width: 80%;
+  margin: auto;
+}
+
 #contingut{
- background-color: white;
- background-image: url("/assets/container_bg.png");
- width: 80%;
- margin: auto;
+  background-color: white;
+  width: 90%;
+  margin: auto;
 }

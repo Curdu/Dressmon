@@ -4,19 +4,15 @@
   <div class="contenidor">
     <img [src]="imatgeURL" alt="" id="imatge">
     <div id="informacioProducte">
-      <h2 id="descripcioProducte">{{producte.description}} </h2>
       <h2 id="preuProducte">{{producte.preu.toFixed(2)}}€</h2>
-      <table>
-        <tr>
-          @for (mida of producte.mides; track mida) {
-            <td class="mida" [id]="mida" (click)="seleccionarMida(mida)" >{{mida}}</td>
-          }
-        </tr>
-      </table>
+      <h2 id="descripcioProducte">{{producte.description}} </h2>
 
-      <form action="">
-        <input type="number" name="cacorra" id="quantitat">
+      <form id="formulariQuantitat">
+        <div id="restarBtn">-</div>
+        <input type="number" name="cacorra" id="quantitat" [value]="quantitat">
+        <div id="sumarBtn">+</div>
       </form>
+      <button id="afegirProducte">Afegir a la cistella</button>
 
     </div>
 
