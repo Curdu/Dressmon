@@ -1,1 +1,22 @@
-<p>registre works!</p>
+<div id="contenidorRegistre">
+  <h1>Registra't </h1>
+  <form action="">
+    <label for="nom">Nom d'usuari</label>
+    <input type="text" name="nom" id="nom" [(ngModel)]="nom">
+
+    <label for="correu">Correu electrònic</label>
+    <input type="email" name="correu" id="correu" [(ngModel)]="correu">
+
+    <label for="passwd">Contrasenya</label>
+    <input type="password" name="passwd" id="passwd" [(ngModel)]="passwd">
+
+    <label for="passwdConf">Confirma la contrasenya</label>
+    <input type="password" name="passwdConf" id="passwdConf" [(ngModel)]="passwdConfirm">
+
+    <input type="submit" value="Registrar" (click)="registrarUsuari()">
+
+  </form>
+
+
+</div>
+
