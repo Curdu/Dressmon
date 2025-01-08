@@ -1,4 +1,26 @@
-<p id="text">cataleg-producte works!</p>
-<div class="contenidor">
-  <div id="imatge"> </div>
+<div id="contenidorProducte">
+  <h1 id="nomProducte">{{ producte.nom }}</h1>
+  <p id="text">cataleg-producte works!</p>
+  <div class="contenidor">
+    <img [src]="imatgeURL" alt="" id="imatge">
+    <div id="informacioProducte">
+      <h2 id="descripcioProducte">{{producte.description}} </h2>
+      <h2 id="preuProducte">{{producte.preu.toFixed(2)}}€</h2>
+      <table>
+        <tr>
+          @for (mida of producte.mides; track mida) {
+            <td class="mida" [id]="mida" (click)="seleccionarMida(mida)" >{{mida}}</td>
+          }
+        </tr>
+      </table>
+
+      <form action="">
+        <input type="number" name="cacorra" id="quantitat">
+      </form>
+
+    </div>
+
+
+  </div>
+
 </div>

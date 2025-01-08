@@ -3,6 +3,7 @@ import {ProductesService} from '../../serveis/productes.service';
 import {ActivatedRoute} from '@angular/router';
 import {Producte} from '../../model/Producte';
 
+
 @Component({
   selector: 'app-cataleg-producte',
   imports: [],
@@ -15,24 +16,49 @@ export class CatalegProducteComponent implements OnInit {
   productesServeis: ProductesService;
   route: ActivatedRoute;
   producte!: Producte;
+  imatgeURL: string;
+  midaSeleccionada: string;
+
 
   constructor(productesServei: ProductesService, route: ActivatedRoute) {
     this.productesServeis = productesServei;
     this.route = route;
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.producte = this.productesServeis.getProducteById(id)!;
+    this.imatgeURL = this.producte.imageUrl
+    this.midaSeleccionada = this.producte.mides[0];
 
   }
 
   ngOnInit():void {
     this.textHTML = document.getElementById('text')!;
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.producte = this.productesServeis.getProducteById(id)!;
+    this.textHTML.classList.add('M');
+    let midesHTML = document.getElementsByClassName('mida')
+    for (let midesHTMLElement of midesHTML) {
+
+      midesHTMLElement.addEventListener('click',()=> midesHTMLElement.classList.add('seleccionada'));
+
+    }
+
     this.textHTML.innerText = this.producte.toString();
     this.carregarImatge()
+    //let midaHTML = document.getElementById(this.midaSeleccionada)!;
+    //midaHTML.classList.add('seleccionada');
+    //this.seleccionarMida(this.midaSeleccionada)
   }
 
   carregarImatge(){
-    document.getElementById("imatge")!.style.backgroundImage = 'url(' + this.producte.imageUrl + ')';
+    this.imatgeURL = this.producte.imageUrl
   }
+
+  seleccionarMida(id: string){
+    let midaAnterior = document.getElementById(this.midaSeleccionada)!;
+    midaAnterior.classList.remove('seleccionada');
+    let midaHTML = document.getElementById(id)!;
+    midaHTML.classList.add('seleccionada');
+    this.midaSeleccionada = id;
+  }
+
 
 
 }

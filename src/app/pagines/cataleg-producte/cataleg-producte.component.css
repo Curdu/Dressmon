@@ -1,12 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
 img{
-  height: 600px;
-  width: 600px;
-}
-#imatge{
   height: 600px;
   width: 600px;
 }
 .contenidor{
   width: 90%;
-  margin: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 2%;
+}
+#nomProducte{
+  font-family: "Jersey 10", serif;
+  font-style: normal;
+  font-size: 3rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+#contenidorProducte{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#imatge{
+  width: 50%;
+  height: 50%;
+
+}
+#informacioProducte{
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2rem;
+}
+table{
+  border-collapse: collapse;
+  border: 1px solid black;
+  border-radius: 2rem;
+}
+td{
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+.mida{
+  padding: 0.5rem 1rem;
+}
+.M {
+  color: red;
+}
+.seleccionada{
+  background-color: red;
 }
