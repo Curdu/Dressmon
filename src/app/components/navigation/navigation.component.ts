@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UsuarisService} from '../../serveis/usuaris.service';
 
 @Component({
   selector: 'app-navigation',
@@ -11,7 +12,7 @@ export class NavigationComponent  implements OnInit {
   iniciSessio!: HTMLElement;
   iconaUsuari!: HTMLElement;
 
-  constructor() {
+  constructor(public s : UsuarisService) {
 
   }
 
@@ -23,11 +24,13 @@ export class NavigationComponent  implements OnInit {
     this.iniciSessio.addEventListener('mouseout', () => {
       this.iconaUsuari.style.backgroundImage = "url(/assets/iconaUsuari.png)"
     })
+
   }
 
   carregarElements(): void {
     this.iniciSessio = document.getElementById('usuari')!;
     this.iconaUsuari = document.getElementById('iconaUsuari')!;
   }
+
 
 }

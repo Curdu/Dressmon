@@ -25,7 +25,9 @@
   </div>
   <div id="iniciSessio">
     <a id="usuari" href="/inicisessio">
-      Iniciar Sessió
+      @if (s.getUsuariActiu().nom !== 'null') {
+        {{s.getUsuariActiu().nom}}
+      }@else{Iniciar Sessió}
       <div id="iconaUsuari"></div>
     </a>
     <div class="linia primera ultima" id="liniaSessio"></div>
