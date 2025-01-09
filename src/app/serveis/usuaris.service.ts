@@ -86,4 +86,20 @@ export class UsuarisService {
     }
     return novaCistella;
   }
+  actualitzarCistella(productes: Producte[]){
+    let usuari = this.getUsuariActiu();
+    usuari.cistella = productes;
+    sessionStorage.setItem('usuariActiu',JSON.stringify(usuari));
+
+  }
+  guardarUsuariLocal():void {
+    let usuaris = this.getLlistaUsuaris();
+    for (let i = 0; i < usuaris.length; i++) {
+      if(usuaris[i].correu === this.getUsuariActiu().correu){
+        usuaris[i] = this.getUsuariActiu();
+      }
+
+    }
+    localStorage.setItem('usuaris',JSON.stringify(usuaris));
+  }
 }
