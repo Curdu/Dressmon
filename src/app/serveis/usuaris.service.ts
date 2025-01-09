@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Usuari} from '../model/Usuari';
+import {ProductesService} from './productes.service';
+import {Producte} from '../model/Producte';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +9,10 @@ import {Usuari} from '../model/Usuari';
 export class UsuarisService {
 
 
-  constructor() {
+  constructor(private s: ProductesService) {
     this.getLlistaUsuaris()
     this.getUsuariActiu()
+    console.log(this.getUsuariActiu())
   }
 
   registrarUsuari(usuari: Usuari): boolean{
@@ -38,16 +41,26 @@ export class UsuarisService {
 
     return false;
   }
+  afegirProducte(producte: Producte, quantitat: number): void{
+    let usuariActiu = this.getUsuariActiu();
+    usuariActiu.addProducte(producte, quantitat);
+    localStorage.setItem('usuariActiu', JSON.stringify(usuariActiu));
+  }
 
   public getUsuariActiu(): Usuari{
     if(JSON.parse(localStorage.getItem('usuariActiu')!) != null) {
       let nom = JSON.parse(localStorage.getItem('usuariActiu')!).nom;
       let correu = JSON.parse(localStorage.getItem('usuariActiu')!).correu;
       let passwd = JSON.parse(localStorage.getItem('usuariActiu')!).passwd;
-      return new Usuari(nom, correu, passwd);
+      let usuari : Usuari = new Usuari(nom, correu, passwd);
+      usuari.setCistella(JSON.parse(localStorage.getItem('usuariActiu')!).cistella);
+      return usuari;
     }
-    localStorage.setItem('usuariActiu',JSON.stringify(new Usuari('null','null','null')))
-    return new Usuari('null','null','null')
+    let usuari = new Usuari('null','null','null');
+    usuari.addProducte(this.s.getProducteById(1)!,1);
+    usuari.addProducte(this.s.getProducteById(1)!,3);
+    localStorage.setItem('usuariActiu',JSON.stringify(usuari));
+    return usuari;
   }
 
   private getLlistaUsuaris(): Usuari[]{

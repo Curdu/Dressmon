@@ -4,17 +4,36 @@ export class Usuari{
   nom: string;
   correu: string;
   passwd: string;
-  cistella: Map<Producte, number>;
+  cistella: Producte[];
 
   constructor(nom: string, correu: string, passwd: string) {
     this.nom = nom;
     this.correu = correu;
     this.passwd = passwd;
-    this.cistella = new Map<Producte, number>();
+    this.cistella = [];
   }
 
    equals(other: Usuari): boolean {
     return this.correu === other.correu;
+  }
+
+  setCistella(cistella: Producte[]) {
+    this.cistella = cistella;
+  }
+  addProducte(producte: Producte, quantity: number) {
+    if(quantity > 0){
+      let esTroba = false;
+      for(let i of this.cistella) {
+        if(i.id === producte.id) {
+          i.quantitat! += quantity;
+          esTroba = true;
+        }
+      }
+      if(!esTroba){
+        producte.quantitat = quantity;
+        this.cistella.push(producte);
+      }
+    }
   }
 
 }
