@@ -1,1 +1,7 @@
-<p>cistella works!</p>
+<p id="patata">{{productes.toString()}}</p>
+@for (producte of productes; track producte.id) {
+  <p>{{producte}}</p>
+  <input class="producte" type="number" name="quantitat" id="{{producte.id+'quantitat'}}" [(ngModel)]="getProducteByID(producte.id).quantitat">
+  <p>{{producte.quantitat}}</p>
+  <button (click)="eliminarProducte(producte.id)"></button>
+}
