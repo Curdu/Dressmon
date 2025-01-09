@@ -30,7 +30,7 @@ export class RegistreComponent {
 
   registrarUsuari(){
 
-    if(this.esContrasenyaConfirmada()){
+    if(this.esContrasenyaConfirmada() && this.nomCorrecte() && this.correuCorrecte()){
       if(this.s.registrarUsuari(new Usuari(this.nom, this.correu, this.passwd))){
         this.router.navigate(['inicisessio']);
       }else {
@@ -42,6 +42,12 @@ export class RegistreComponent {
   }
 
   private esContrasenyaConfirmada(): boolean{
-    return this.passwd === this.passwdConfirm;
+    return this.passwd === this.passwdConfirm && this.passwdConfirm !== '';
+  }
+  private nomCorrecte(): boolean{
+    return this.nom !== '';
+  }
+  private correuCorrecte(){
+    return this.correu !== '' && this.correu.includes('@')
   }
 }
