@@ -1,1 +1,22 @@
-<p id="text">cataleg-producte works!</p>
+<div id="contenidorProducte">
+  <h1 id="nomProducte">{{ producte.nom }}</h1>
+  <p id="text">cataleg-producte works!</p>
+  <div class="contenidor">
+    <img [src]="imatgeURL" alt="" id="imatge">
+    <div id="informacioProducte">
+      <h2 id="preuProducte">{{producte.preu.toFixed(2)}}€</h2>
+      <h2 id="descripcioProducte">{{producte.description}} </h2>
+
+      <form id="formulariQuantitat">
+        <div id="restarBtn">-</div>
+        <input type="number" name="cacorra" id="quantitat" [value]="quantitat">
+        <div id="sumarBtn">+</div>
+      </form>
+      <button id="afegirProducte" (click)="afegirCistella()">Afegir a la cistella</button>
+
+    </div>
+
+
+  </div>
+
+</div>

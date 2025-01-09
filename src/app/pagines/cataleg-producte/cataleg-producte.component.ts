@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ProductesService} from '../../serveis/productes.service';
 import {ActivatedRoute} from '@angular/router';
 import {Producte} from '../../model/Producte';
+import {UsuarisService} from '../../serveis/usuaris.service'
+
 
 @Component({
   selector: 'app-cataleg-producte',
@@ -12,23 +14,67 @@ import {Producte} from '../../model/Producte';
 export class CatalegProducteComponent implements OnInit {
 
   textHTML!: HTMLElement;
-  productesServeis: ProductesService;
+  btnRestar!: HTMLElement;
+  btnSumar!: HTMLElement;
+  btnAfegir!: HTMLElement;
   route: ActivatedRoute;
   producte!: Producte;
+  imatgeURL: string;
+  midaSeleccionada: string;
+  quantitat: number;
 
-  constructor(productesServei: ProductesService, route: ActivatedRoute) {
-    this.productesServeis = productesServei;
+
+  constructor(private productesServei: ProductesService, route: ActivatedRoute, private usuarisServei : UsuarisService) {
     this.route = route;
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.producte = productesServei.getProducteById(id)!;
+    this.imatgeURL = this.producte.imageUrl
+    this.midaSeleccionada = this.producte.mides[0];
+    this.quantitat = 1;
 
   }
 
   ngOnInit():void {
-    this.textHTML = document.getElementById('text')!;
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.producte = this.productesServeis.getProducteById(id)!;
+    this.carregarComponents()
+    this.carregarEvents()
+    this.textHTML.classList.add('M');
+    let midesHTML = document.getElementsByClassName('mida')
+    for (let midesHTMLElement of midesHTML) {
+
+      midesHTMLElement.addEventListener('click',()=> midesHTMLElement.classList.add('seleccionada'));
+
+    }
+
     this.textHTML.innerText = this.producte.toString();
+    this.carregarImatge()
 
   }
+
+  carregarImatge(){
+    this.imatgeURL = this.producte.imageUrl
+  }
+  carregarComponents(){
+    this.textHTML = document.getElementById('text')!;
+    this.btnRestar = document.getElementById('restarBtn')!;
+    this.btnSumar = document.getElementById('sumarBtn')!;
+    this.btnAfegir = document.getElementById('afegirProducte')!;
+
+  }
+  carregarEvents(){
+    this.btnSumar.addEventListener('click',()=> this.quantitat++);
+    this.btnRestar.addEventListener('click',()=> {
+      if(this.quantitat > 0){
+        this.quantitat--
+      }
+    });
+    this.btnAfegir.addEventListener('click',()=> console.log(this.quantitat));
+  }
+  afegirCistella(){
+    this.usuarisServei.afegirProducte(this.producte,this.quantitat);
+  }
+
+
+
 
 
 }
