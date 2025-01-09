@@ -33,7 +33,7 @@ export class UsuarisService {
 
       for (const i of usuaris) {
         if (i.equals(usuari) && i.passwd === usuari.passwd) {
-          localStorage.setItem('usuariActiu', JSON.stringify(i));
+          sessionStorage.setItem('usuariActiu', JSON.stringify(i));
           console.log(i);
           return true;
         }
@@ -44,22 +44,22 @@ export class UsuarisService {
   afegirProducte(producte: Producte, quantitat: number): void{
     let usuariActiu = this.getUsuariActiu();
     usuariActiu.addProducte(producte, quantitat);
-    localStorage.setItem('usuariActiu', JSON.stringify(usuariActiu));
+    sessionStorage.setItem('usuariActiu', JSON.stringify(usuariActiu));
   }
 
   public getUsuariActiu(): Usuari{
-    if(JSON.parse(localStorage.getItem('usuariActiu')!) != null) {
-      let nom = JSON.parse(localStorage.getItem('usuariActiu')!).nom;
-      let correu = JSON.parse(localStorage.getItem('usuariActiu')!).correu;
-      let passwd = JSON.parse(localStorage.getItem('usuariActiu')!).passwd;
+    if(JSON.parse(sessionStorage.getItem('usuariActiu')!) != null) {
+      let nom = JSON.parse(sessionStorage.getItem('usuariActiu')!).nom;
+      let correu = JSON.parse(sessionStorage.getItem('usuariActiu')!).correu;
+      let passwd = JSON.parse(sessionStorage.getItem('usuariActiu')!).passwd;
       let usuari : Usuari = new Usuari(nom, correu, passwd);
-      usuari.setCistella(JSON.parse(localStorage.getItem('usuariActiu')!).cistella);
+      usuari.setCistella(JSON.parse(sessionStorage.getItem('usuariActiu')!).cistella);
       return usuari;
     }
     let usuari = new Usuari('null','null','null');
     usuari.addProducte(this.s.getProducteById(1)!,1);
     usuari.addProducte(this.s.getProducteById(1)!,3);
-    localStorage.setItem('usuariActiu',JSON.stringify(usuari));
+    sessionStorage.setItem('usuariActiu',JSON.stringify(usuari));
     return usuari;
   }
 
