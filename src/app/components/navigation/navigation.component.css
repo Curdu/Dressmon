@@ -2,6 +2,7 @@ nav{
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: #f3f3f3;
 }
 #apartats{
   display: flex;
@@ -22,6 +23,18 @@ nav{
   color: black;
   font-weight: bold;
   font-size: 1.2rem;
+}
+#inici{
+  color: #737373;
+}
+#cataleg{
+  color: #ad2c0c;
+}
+#condicions{
+  color: #b29224;
+}
+#contacte{
+  color: #316e37;
 }
 #inici:hover{
   background-color: lightgray;
@@ -109,8 +122,9 @@ nav{
   font-weight: bold;
   font-size: 1.2rem;
   text-align: left;
-  color: #2fa3d2;
+  color: #237fa1;
   font-family: Consolas, Monaco, monospace;
+  background-color: white;
 }
 #usuari:hover{
   background-color: #2fa3d2;
