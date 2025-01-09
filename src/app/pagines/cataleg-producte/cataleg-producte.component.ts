@@ -20,7 +20,7 @@ export class CatalegProducteComponent implements OnInit {
   route: ActivatedRoute;
   producte!: Producte;
   imatgeURL: string;
-  midaSeleccionada: string;
+
   quantitat: number;
 
 
@@ -29,7 +29,6 @@ export class CatalegProducteComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.producte = productesServei.getProducteById(id)!;
     this.imatgeURL = this.producte.imageUrl
-    this.midaSeleccionada = this.producte.mides[0];
     this.quantitat = 1;
 
   }
