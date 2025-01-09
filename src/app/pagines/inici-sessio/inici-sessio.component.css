@@ -1,22 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 #contenidorIniciSessio{
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  justify-content: center;
   align-items: center;
 }
-.jersey-10-regular {
+#titolIniciSessio{
+  font-size: 5rem;
   font-family: "Jersey 10", serif;
   font-style: normal;
 }
-h1{
-  font-size: 3rem;
-}
+
 #formulariIniciSessio{
+  border: gray 1px solid;
+  width: 28%;
   display: flex;
   flex-direction: column;
-  width: 50%;
-  padding: 2rem 0;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#1f1f1f, #2a2a2a);
+  padding: 2rem 20%;
+  margin-bottom: 2rem;
+  border-radius: 10px;
 }
+label{
+  font-size: 1.5rem;
+  color: white;
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+  cursor: pointer;
+}
+input{
+  width: 100%;
+  height: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+input[type=submit]{
+  width: auto;
+  padding: 0 3rem ;
+  background: #00af00;
+  color: white;
+  border: white 1px solid;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+a{
+  color: #2fa3d2;
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+  align-self: flex-start;
+}
+a:hover{
+  color: white;
+}
+
+
+
