@@ -53,7 +53,7 @@ export class UsuarisService {
       let correu = JSON.parse(sessionStorage.getItem('usuariActiu')!).correu;
       let passwd = JSON.parse(sessionStorage.getItem('usuariActiu')!).passwd;
       let usuari : Usuari = new Usuari(nom, correu, passwd);
-      usuari.setCistella(JSON.parse(sessionStorage.getItem('usuariActiu')!).cistella);
+      usuari.setCistella(this.parseCistella(JSON.parse(sessionStorage.getItem('usuariActiu')!).cistella));
       return usuari;
     }
     let usuari = new Usuari('null','null','null');
@@ -75,5 +75,15 @@ export class UsuarisService {
     }
 
     return usuaris;
+  }
+  private parseCistella(cistella: Producte[]): Producte[]{
+    let novaCistella: Producte[] = []
+    for (let i of cistella) {
+      let producte = new Producte(i.id, i.nom, i.imageUrl, i.preu,i.description, i.categoria)
+      producte.quantitat = i.quantitat;
+      novaCistella.push(producte);
+
+    }
+    return novaCistella;
   }
 }
