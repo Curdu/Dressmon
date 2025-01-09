@@ -6,41 +6,61 @@ import {Usuari} from '../model/Usuari';
 })
 export class UsuarisService {
 
-  usuariActiu: Usuari;
-  usuaris: Usuari[];
 
   constructor() {
-
-    this.usuariActiu = new Usuari("null","null","null");
-    this.usuaris = [];
-    this.usuaris.push(new Usuari("RaulVidal","raulvidal@gmail.com", "admin123"));
-    this.usuaris.push(new Usuari("Admin","admin@gmail.com", "admin"));
-    this.usuaris.push(new Usuari("Patata","patata@gmail.com", "patata"));
-    this.usuaris.push(new Usuari("AdriaTregon","adriatregon@gmail.com", "admin123"));
-    this.usuaris.push(new Usuari("AlexisAlmansa","alexisalmansa@gmail.com", "admin123"));
-    this.usuaris.push(new Usuari("Curdu","curdu@gmail.com", "admin"));
-
+    this.getLlistaUsuaris()
+    this.getUsuariActiu()
   }
 
-
   registrarUsuari(usuari: Usuari): boolean{
-    for(const i of this.usuaris){
+    let usuaris = this.getLlistaUsuaris();
+    for(const i of usuaris){
       if (i.equals(usuari)){
         return false;
       }
     }
-    this.usuaris.push(usuari);
+    usuaris.push(usuari);
+    localStorage.setItem('usuaris', JSON.stringify(usuaris));
+
     return true;
   }
 
-   iniciarSessio(usuari: Usuari): boolean{
-    for (const i of this.usuaris) {
-      if (i.equals(usuari) && i.passwd === usuari.passwd){
-        this.usuariActiu = i;
-        console.log(this.usuariActiu);
-        return true;
+  iniciarSessio(usuari: Usuari): boolean{
+    let usuaris = this.getLlistaUsuaris();
+
+      for (const i of usuaris) {
+        if (i.equals(usuari) && i.passwd === usuari.passwd) {
+          localStorage.setItem('usuariActiu', JSON.stringify(i));
+          console.log(i);
+          return true;
+        }
       }
-    }
+
     return false;
+  }
+
+  public getUsuariActiu(): Usuari{
+    if(JSON.parse(localStorage.getItem('usuariActiu')!) != null) {
+      let nom = JSON.parse(localStorage.getItem('usuariActiu')!).nom;
+      let correu = JSON.parse(localStorage.getItem('usuariActiu')!).correu;
+      let passwd = JSON.parse(localStorage.getItem('usuariActiu')!).passwd;
+      return new Usuari(nom, correu, passwd);
+    }
+    localStorage.setItem('usuariActiu',JSON.stringify(new Usuari('null','null','null')))
+    return new Usuari('null','null','null')
+  }
+
+  private getLlistaUsuaris(): Usuari[]{
+    let usuaris: Usuari[] = [];
+    if(JSON.parse(localStorage.getItem('usuaris')!) != null){
+      for(let i of JSON.parse(localStorage.getItem('usuaris')!)){
+        usuaris.push(new Usuari(i.nom,i.correu,i.passwd))
+      }
+    }else{
+      localStorage.setItem("usuaris", JSON.stringify([new Usuari('null','null','null')]));
+      usuaris.push(new Usuari('null','null','null'))
+    }
+
+    return usuaris;
   }
 }
