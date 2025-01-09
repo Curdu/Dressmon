@@ -33,10 +33,11 @@ export class UsuarisService {
     return true;
   }
 
-  iniciarSessio(usuari: Usuari): boolean{
+   iniciarSessio(usuari: Usuari): boolean{
     for (const i of this.usuaris) {
       if (i.equals(usuari) && i.passwd === usuari.passwd){
-        this.usuariActiu = usuari;
+        this.usuariActiu = i;
+        console.log(this.usuariActiu);
         return true;
       }
     }
