@@ -15,9 +15,9 @@ export class ProductesService {
   }
 
   private generateProductes(): void {
-    this.productes.push(new Producte(0,"Mitjons Bulbasaur","/assets/productes/sudadera-bulbasaur-600x600.jpg",19.2,"BOmboclat","Mitjons"))
+
     this.productes.push(new Producte(1,"Dessuadora Bulbasaur","/assets/productes/sudadera-bulbasaur-600x600.jpg",19.2,"BOmboclat","Dessuadora"))
-    this.productes.push(new Producte(2,"Mitjons Bulbasaur","assets/mitjonsbulbasaur.png",19.2,"BOmboclat","Mitjons"))
+    this.productes.push(new Producte(2,"Mitjons Bulbasaur","/assets/productes/mitjonsBulbasaur.jpg",19.2,"BOmboclat","Mitjons"))
     this.productes.push(new Producte(3,"Mitjons Bulbasaur","assets/mitjonsbulbasaur.png",19.2,"BOmboclat","Mitjons"))
     this.productes.push(new Producte(4,"Mitjons Bulbasaur","assets/mitjonsbulbasaur.png",19.2,"BOmboclat","Mitjons"))
   }

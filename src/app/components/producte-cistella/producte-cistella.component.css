@@ -3,6 +3,7 @@
   flex-direction: row;
   width: 80%;
   border: black solid 1px;
+  max-width: 55rem;
 
 }
 
@@ -16,6 +17,7 @@
 }
 #imatge{
   width: 30%;
+
 }
 #preu{
   align-self: center;
