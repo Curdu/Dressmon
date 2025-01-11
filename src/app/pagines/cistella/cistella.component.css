@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+#productesCistella{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+h1{
+  font-size: 5rem;
+  font-family: "Jersey 10", serif;
+  font-style: normal;
+  text-align: center;
+}
+#preuTotal{
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  border-top: black solid 3px;
+
+  margin: auto;
+  font-family: "Jersey 10", serif;
+  font-style: normal;
+  text-align: center;
+  column-gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}

@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {UsuarisService} from '../../serveis/usuaris.service';
 import {Producte} from '../../model/Producte';
 import {FormsModule} from '@angular/forms';
+import {ProducteCistellaComponent} from '../../components/producte-cistella/producte-cistella.component';
 
 @Component({
   selector: 'app-cistella',
   imports: [
-    FormsModule
+    FormsModule,
+    ProducteCistellaComponent
   ],
   templateUrl: './cistella.component.html',
   styleUrl: './cistella.component.css'
@@ -46,6 +48,15 @@ export class CistellaComponent implements OnInit {
 
       }
     }
+  }
+  getPreuTotal(): number{
+    let suma = 0;
+    this.productes.forEach(producte => {suma += producte.preu*producte.quantitat!;});
+    return suma;
+  }
+  eliminarCistella(){
+    this.usuarisService.actualitzarCistella([])
+    this.productes = []
   }
 
 }

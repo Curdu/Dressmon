@@ -20,6 +20,15 @@ export class Usuari{
   setCistella(cistella: Producte[]) {
     this.cistella = cistella;
   }
+  actualitzarQuantitat(id: number, quantitat: number) {
+    for(let i = 0; i < this.cistella.length; i++) {
+      if(this.cistella[i].id === id){
+        this.cistella[i].quantitat = quantitat;
+      }
+    }
+
+  }
+
   addProducte(producte: Producte, quantity: number) {
     if(quantity > 0){
       let esTroba = false;
@@ -35,5 +44,7 @@ export class Usuari{
       }
     }
   }
+
+
 
 }
