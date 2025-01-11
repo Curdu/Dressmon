@@ -1,0 +1,23 @@
+#displayProducte{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  border: black solid 1px;
+
+}
+
+#informacio{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.7rem;
+}
+#imatge{
+  width: 30%;
+}
+#preu{
+  align-self: center;
+}
+
