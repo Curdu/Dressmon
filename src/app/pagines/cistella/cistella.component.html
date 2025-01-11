@@ -1,7 +1,20 @@
-<p id="patata">{{productes.toString()}}</p>
-@for (producte of productes; track producte.id) {
-  <p>{{producte}}</p>
-  <input class="producte" type="number" name="quantitat" id="{{producte.id+'quantitat'}}" [(ngModel)]="getProducteByID(producte.id).quantitat">
-  <p>{{producte.quantitat}}</p>
-  <button (click)="eliminarProducte(producte.id)"></button>
+<h1>La teva cistella</h1>
+<div id="productesCistella">
+@for (producte of productes; track producte.id; let i = $index) {
+  <app-producte-cistella
+    [producte]="producte"
+  >
+  </app-producte-cistella>
+
 }
+</div>
+<div id="preuTotal">
+  <h2>
+    Preu Total:
+  </h2>
+  <h2 id="preu">
+    {{getPreuTotal().toFixed(2)}}€
+  </h2>
+  <button (click)="eliminarCistella()">Comprar</button>
+</div>
+
