@@ -4,7 +4,7 @@
     <h2>{{producte.nom}}</h2>
     <label for="quantitat" id="quantitatLabel">Quantitat:</label>
     <input type="number" name="quantitat" id="quantitat" (input)="actualitzarQuantitat()" [(ngModel)]="producte.quantitat">
-    <button>Eliminar Producte</button>
+
   </div>
   <h2 id="preu">{{getPreu().toFixed(2)}}€</h2>
 </div>

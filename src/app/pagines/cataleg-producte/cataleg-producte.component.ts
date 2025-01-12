@@ -13,7 +13,6 @@ import {UsuarisService} from '../../serveis/usuaris.service'
 })
 export class CatalegProducteComponent implements OnInit {
 
-  textHTML!: HTMLElement;
   btnRestar!: HTMLElement;
   btnSumar!: HTMLElement;
   btnAfegir!: HTMLElement;
@@ -36,7 +35,6 @@ export class CatalegProducteComponent implements OnInit {
   ngOnInit():void {
     this.carregarComponents()
     this.carregarEvents()
-    this.textHTML.classList.add('M');
     let midesHTML = document.getElementsByClassName('mida')
     for (let midesHTMLElement of midesHTML) {
 
@@ -44,7 +42,6 @@ export class CatalegProducteComponent implements OnInit {
 
     }
 
-    this.textHTML.innerText = this.producte.toString();
     this.carregarImatge()
 
   }
@@ -53,7 +50,6 @@ export class CatalegProducteComponent implements OnInit {
     this.imatgeURL = this.producte.imageUrl
   }
   carregarComponents(){
-    this.textHTML = document.getElementById('text')!;
     this.btnRestar = document.getElementById('restarBtn')!;
     this.btnSumar = document.getElementById('sumarBtn')!;
     this.btnAfegir = document.getElementById('afegirProducte')!;
