@@ -21,8 +21,8 @@ export class ProductesService {
     this.productes.push(new Producte(3,"Mitjons Bulbasaur","assets/mitjonsbulbasaur.png",19.2,"BOmboclat","Mitjons"))
     this.productes.push(new Producte(4,"Mitjons Bulbasaur","assets/mitjonsbulbasaur.png",19.2,"BOmboclat","Mitjons"))
   }
-  getAllCategories(): String[] {
-    let categories: String[] = [];
+  getAllCategories(): string[] {
+    let categories: string[] = [];
     for (const producte of this.productes) {
       if(!categories.includes(producte.categoria)){
         categories.push(producte.categoria);

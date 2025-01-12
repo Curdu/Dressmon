@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProductesService} from '../../serveis/productes.service';
 import {ActivatedRoute} from '@angular/router';
 import {Producte} from '../../model/Producte';
@@ -13,8 +13,8 @@ import {UsuarisService} from '../../serveis/usuaris.service'
 })
 export class CatalegProducteComponent implements OnInit {
 
-  btnRestar!: HTMLElement;
-  btnSumar!: HTMLElement;
+  @ViewChild('restarBtn') btnRestar!: ElementRef;
+  @ViewChild('sumarBtn') btnSumar!: ElementRef;
   btnAfegir!: HTMLElement;
   route: ActivatedRoute;
   producte!: Producte;
@@ -50,14 +50,15 @@ export class CatalegProducteComponent implements OnInit {
     this.imatgeURL = this.producte.imageUrl
   }
   carregarComponents(){
-    this.btnRestar = document.getElementById('restarBtn')!;
-    this.btnSumar = document.getElementById('sumarBtn')!;
+
     this.btnAfegir = document.getElementById('afegirProducte')!;
 
   }
   carregarEvents(){
-    this.btnSumar.addEventListener('click',()=> this.quantitat++);
-    this.btnRestar.addEventListener('click',()=> {
+    const btnSumar = this.btnRestar.nativeElement as HTMLElement;
+    const btnRestar = this.btnRestar.nativeElement as HTMLElement;
+    btnSumar.addEventListener('click',()=> this.quantitat++);
+    btnRestar.addEventListener('click',()=> {
       if(this.quantitat > 0){
         this.quantitat--
       }
