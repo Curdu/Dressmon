@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProductesService} from '../../serveis/productes.service';
 import {ActivatedRoute} from '@angular/router';
 import {Producte} from '../../model/Producte';
@@ -11,7 +11,7 @@ import {UsuarisService} from '../../serveis/usuaris.service'
   templateUrl: './cataleg-producte.component.html',
   styleUrl: './cataleg-producte.component.css'
 })
-export class CatalegProducteComponent implements OnInit {
+export class CatalegProducteComponent implements OnInit , AfterViewInit {
 
   @ViewChild('restarBtn') btnRestar!: ElementRef;
   @ViewChild('sumarBtn') btnSumar!: ElementRef;
@@ -33,29 +33,25 @@ export class CatalegProducteComponent implements OnInit {
   }
 
   ngOnInit():void {
-    this.carregarComponents()
-    this.carregarEvents()
-    let midesHTML = document.getElementsByClassName('mida')
-    for (let midesHTMLElement of midesHTML) {
 
-      midesHTMLElement.addEventListener('click',()=> midesHTMLElement.classList.add('seleccionada'));
-
-    }
-
-    this.carregarImatge()
 
   }
+  ngAfterViewInit():void {
+    this.carregarEvents()
+    this.carregarComponents()
+    this.carregarImatge()
+  }
+
 
   carregarImatge(){
     this.imatgeURL = this.producte.imageUrl
   }
   carregarComponents(){
-
     this.btnAfegir = document.getElementById('afegirProducte')!;
 
   }
   carregarEvents(){
-    const btnSumar = this.btnRestar.nativeElement as HTMLElement;
+    const btnSumar = this.btnSumar.nativeElement as HTMLElement;
     const btnRestar = this.btnRestar.nativeElement as HTMLElement;
     btnSumar.addEventListener('click',()=> this.quantitat++);
     btnRestar.addEventListener('click',()=> {
@@ -63,7 +59,6 @@ export class CatalegProducteComponent implements OnInit {
         this.quantitat--
       }
     });
-    this.btnAfegir.addEventListener('click',()=> console.log(this.quantitat));
   }
   afegirCistella(){
     this.usuarisServei.afegirProducte(this.producte,this.quantitat);
