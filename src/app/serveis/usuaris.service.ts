@@ -67,7 +67,9 @@ export class UsuarisService {
     let usuaris: Usuari[] = [];
     if(JSON.parse(localStorage.getItem('usuaris')!) != null){
       for(let i of JSON.parse(localStorage.getItem('usuaris')!)){
-        usuaris.push(new Usuari(i.nom,i.correu,i.passwd))
+        let usuari = new Usuari(i.nom,i.correu,i.passwd)
+        usuari.setCistella(i.cistella)
+        usuaris.push(usuari)
       }
     }else{
       localStorage.setItem("usuaris", JSON.stringify([new Usuari('null','null','null')]));
