@@ -1,4 +1,10 @@
 # Dressmon
+Tasques pendents:
+//TODO Pàgina Inici
+//TODO Pàgina Catàleg
+//TODO Pàgina Categoria
+//TODO Tancar Sessió
+
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.5.
 
