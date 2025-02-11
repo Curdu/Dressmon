@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Usuari} from '../model/Usuari';
 import {ProductesService} from './productes.service';
 import {Producte} from '../model/Producte';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError} from 'rxjs';
+import {JwtException} from '../model/errors/JwtException';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,8 @@ import {Producte} from '../model/Producte';
 export class UsuarisService {
 
 
-  constructor(private s: ProductesService) {
+
+  constructor(private s: ProductesService, private http: HttpClient) {
     this.getLlistaUsuaris()
     this.getUsuariActiu()
     console.log(this.getUsuariActiu())
@@ -28,19 +32,31 @@ export class UsuarisService {
     return true;
   }
 
-  iniciarSessio(usuari: Usuari): boolean{
-    let usuaris = this.getLlistaUsuaris();
+    iniciarSessio(usuario: Usuari){
+    return new Promise<void>(resolve => {
+      this.http.post<{ token: string }>("http://localhost:3333/login", {user: usuario.nom, password: usuario.passwd}).pipe(
+        catchError((error: HttpErrorResponse) => {
 
-      for (const i of usuaris) {
-        if (i.equals(usuari) && i.passwd === usuari.passwd) {
-          sessionStorage.setItem('usuariActiu', JSON.stringify(i));
-          console.log(i);
-          return true;
+          if (error.status === 401) {
+            throw new JwtException('Credenciales incorrectas. Intente nuevamente.',error.status);
+          } else if (error.status === 500) {
+            throw new JwtException('Error interno del servidor. Intente más tarde.',error.status);
+          }else if(error.status === 400){
+            throw new JwtException("L'usuari no existeix", error.status);
+          }
+          else {
+            throw new JwtException('Ocurrió un error desconocido.',error.status);
+          }
+        })
+      ).subscribe(
+        (token) => {
+          sessionStorage.setItem('token', JSON.stringify(token));
         }
-      }
+      )
+    })
 
-    return false;
   }
+
   afegirProducte(producte: Producte, quantitat: number): void{
     let usuariActiu = this.getUsuariActiu();
     usuariActiu.addProducte(producte, quantitat);
