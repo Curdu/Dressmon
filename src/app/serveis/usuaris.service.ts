@@ -15,20 +15,19 @@ export class UsuarisService {
     console.log(this.getUsuariActiu())
   }
 
-  registrarUsuari(usuari: Usuari): boolean{
-    let usuaris = this.getLlistaUsuaris();
-    for(const i of usuaris){
-      if (i.equals(usuari)){
-        return false;
-      }
+  async registrarUsuari(correu: string, passwd: string) {
+    try {
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(correu, passwd);
+      console.log("Usuari registrat:", userCredential.user);
+      return true;
+    } catch (error: any) {
+      console.error("Error en el registre:", error.message);
+      return false;
     }
-    usuaris.push(usuari);
-    localStorage.setItem('usuaris', JSON.stringify(usuaris));
-
-    return true;
   }
 
-  iniciarSessio(usuari: Usuari): boolean{
+
+    iniciarSessio(usuari: Usuari): boolean{
     let usuaris = this.getLlistaUsuaris();
 
       for (const i of usuaris) {
@@ -104,4 +103,5 @@ export class UsuarisService {
     }
     localStorage.setItem('usuaris',JSON.stringify(usuaris));
   }
+
 }

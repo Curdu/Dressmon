@@ -28,26 +28,26 @@ export class RegistreComponent {
 
   }
 
-  registrarUsuari(){
-
-    if(this.esContrasenyaConfirmada() && this.nomCorrecte() && this.correuCorrecte()){
-      if(this.s.registrarUsuari(new Usuari(this.nom, this.correu, this.passwd))){
+  async registrarUsuari() {
+    if (this.esContrasenyaConfirmada() && this.nomCorrecte() && this.correuCorrecte()) {
+      const registroExitoso = await this.s.registrarUsuari(this.correu, this.passwd);
+      if (registroExitoso) {
         this.router.navigate(['inicisessio']);
-      }else {
-        console.log("Aquest usuari ja existeix")
+      } else {
+        console.log("Aquest usuari ja existeix o hi ha un error en el registre");
       }
-    }else{
-      console.log("Les contrasenyes no coincideixen")
+    } else {
+      console.log("Les contrasenyes no coincideixen o hi ha un error");
     }
   }
 
-  private esContrasenyaConfirmada(): boolean{
+  private esContrasenyaConfirmada(): boolean {
     return this.passwd === this.passwdConfirm && this.passwdConfirm !== '';
   }
-  private nomCorrecte(): boolean{
-    return this.nom !== '';
+  private nomCorrecte(): boolean {
+    return this.nom.trim() !== '';
   }
-  private correuCorrecte(){
-    return this.correu !== '' && this.correu.includes('@')
+  private correuCorrecte(): boolean {
+    return this.correu.trim() !== '' && this.correu.includes('@');
   }
 }
