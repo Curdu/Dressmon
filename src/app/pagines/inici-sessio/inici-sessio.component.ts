@@ -14,23 +14,30 @@ import {Router} from '@angular/router';
 })
 export class IniciSessioComponent {
 
-  correu: string;
+  usuari: string;
   passwd: string;
   constructor( private s : UsuarisService, private router: Router) {
-    this.correu = "";
+    this.usuari = "";
     this.passwd = "";
 
   }
 
-  iniciSessio(): void{
-    if(this.s.iniciarSessio(new Usuari("",this.correu,this.passwd))){
-      console.log("Inici de sessió correcte")
-      this.router.navigate(["/inici"])
-    }else{
-      console.log("Inici de sessió incorrecte")
+  async iniciSessio(){
+    if(this.usuariValid()){
+      try{
+        await this.s.iniciarSessio(new Usuari(this.usuari,"",this.passwd)).then();
+        await this.router.navigate(['/']);
+
+
+      }catch (e: any){
+        console.log(e )
+      }
+
     }
+  }
 
-
+  usuariValid(): boolean {
+    return this.usuari !== "" && this.passwd !== ""
   }
 
 }
