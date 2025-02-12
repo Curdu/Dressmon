@@ -28,8 +28,9 @@ export class IniciSessioComponent {
         await this.s.iniciarSessio(new Usuari(this.usuari,"",this.passwd)).then();
         await this.router.navigate(['/']);
 
-      }catch (e){
-        console.log(e)
+
+      }catch (e: any){
+        console.log(e )
       }
 
     }
