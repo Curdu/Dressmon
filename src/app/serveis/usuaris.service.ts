@@ -5,6 +5,9 @@ import {Producte} from '../model/Producte';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs';
 import {JwtException} from '../model/errors/JwtException';
+import {jwtDecode} from 'jwt-decode';
+
+const CLAU_USUARI_ACTIU: string = "usuariActiu";
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +43,7 @@ export class UsuarisService {
           if (error.status === 401) {
             throw new JwtException('Credenciales incorrectas. Intente nuevamente.',error.status);
           } else if (error.status === 500) {
-            throw new JwtException('Error interno del servidor. Intente más tarde.',error.status);
+            throw new JwtException('Error intern del servidor.',error.status);
           }else if(error.status === 400){
             throw new JwtException("L'usuari no existeix", error.status);
           }
@@ -51,31 +54,63 @@ export class UsuarisService {
       ).subscribe(
         (token) => {
           sessionStorage.setItem('token', JSON.stringify(token));
-        }
-      )
-    })
+          this.setUsuariActiu(this.obtenirPayloadToken(token.token));
+          resolve();
 
+        }
+      );
+    })
+  }
+
+  private decodeToken(token: string): any {
+    try{
+      return jwtDecode(token);
+    }catch (e){
+      console.log(e);
+      return null;
+    }
+  }
+
+  private parseUsuari(data: any): Usuari {
+    if(data.user == undefined){
+      new Error("L'usuari és indefinit");
+    }
+    else if(data.email == undefined){
+      new Error("El correu és indefinida")
+    }
+
+    return new Usuari(data.user,data.email,"");
+  }
+
+  private obtenirPayloadToken(token: string): any {
+
+    if(!token) return null;
+    return this.decodeToken(token)
   }
 
   afegirProducte(producte: Producte, quantitat: number): void{
     let usuariActiu = this.getUsuariActiu();
     usuariActiu.addProducte(producte, quantitat);
-    sessionStorage.setItem('usuariActiu', JSON.stringify(usuariActiu));
+    sessionStorage.setItem(CLAU_USUARI_ACTIU, JSON.stringify(usuariActiu));
+  }
+  private setUsuariActiu(usuari: any){
+    sessionStorage.setItem(CLAU_USUARI_ACTIU, JSON.stringify(this.parseUsuari(usuari.data)));
   }
 
+
   public getUsuariActiu(): Usuari{
-    if(JSON.parse(sessionStorage.getItem('usuariActiu')!) != null) {
-      let nom = JSON.parse(sessionStorage.getItem('usuariActiu')!).nom;
-      let correu = JSON.parse(sessionStorage.getItem('usuariActiu')!).correu;
-      let passwd = JSON.parse(sessionStorage.getItem('usuariActiu')!).passwd;
+    if(JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!) != null) {
+      let nom = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).nom;
+      let correu = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).correu;
+      let passwd = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).passwd;
       let usuari : Usuari = new Usuari(nom, correu, passwd);
-      usuari.setCistella(this.parseCistella(JSON.parse(sessionStorage.getItem('usuariActiu')!).cistella));
+      usuari.setCistella(this.parseCistella(JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).cistella));
       return usuari;
     }
     let usuari = new Usuari('null','null','null');
     usuari.addProducte(this.s.getProducteById(1)!,1);
     usuari.addProducte(this.s.getProducteById(1)!,3);
-    sessionStorage.setItem('usuariActiu',JSON.stringify(usuari));
+    sessionStorage.setItem(CLAU_USUARI_ACTIU,JSON.stringify(usuari));
     return usuari;
   }
 
@@ -107,7 +142,7 @@ export class UsuarisService {
   actualitzarCistella(productes: Producte[]){
     let usuari = this.getUsuariActiu();
     usuari.cistella = productes;
-    sessionStorage.setItem('usuariActiu',JSON.stringify(usuari));
+    sessionStorage.setItem(CLAU_USUARI_ACTIU,JSON.stringify(usuari));
 
   }
   guardarUsuariLocal():void {
