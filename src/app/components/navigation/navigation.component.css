@@ -125,6 +125,7 @@ nav{
   color: #237fa1;
   font-family: Consolas, Monaco, monospace;
   background-color: white;
+  cursor: pointer;
 }
 #usuari:hover{
   background-color: #2fa3d2;

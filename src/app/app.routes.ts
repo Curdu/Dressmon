@@ -8,6 +8,7 @@ import {IniciSessioComponent} from './pagines/inici-sessio/inici-sessio.componen
 import {RegistreComponent} from './pagines/registre/registre.component';
 import {IniciComponent} from './pagines/inici/inici.component';
 import {CistellaComponent} from './pagines/cistella/cistella.component';
+import {PerfilComponent} from './pagines/perfil/perfil.component';
 
 export const routes: Routes = [{ path: '',redirectTo: 'inici',  pathMatch: 'full' },
   {path: 'inici', component: IniciComponent},
@@ -18,5 +19,6 @@ export const routes: Routes = [{ path: '',redirectTo: 'inici',  pathMatch: 'full
   {path: 'contacte', component: ContacteComponent},
   {path: 'inicisessio', component: IniciSessioComponent},
   {path: 'registre', component: RegistreComponent},
-  {path: 'cistella', component: CistellaComponent}
+  {path: 'cistella', component: CistellaComponent},
+  {path: 'perfil', component: PerfilComponent}
 ];

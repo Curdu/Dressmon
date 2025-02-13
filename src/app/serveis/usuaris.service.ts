@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Usuari} from '../model/Usuari';
 import {ProductesService} from './productes.service';
 import {Producte} from '../model/Producte';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs';
 import {JwtException} from '../model/errors/JwtException';
 import {jwtDecode} from 'jwt-decode';
@@ -37,7 +37,8 @@ export class UsuarisService {
 
     iniciarSessio(usuario: Usuari){
     return new Promise<void>(resolve => {
-      this.http.post<{ token: string }>("http://localhost:3333/login", {user: usuario.nom, password: usuario.passwd}).pipe(
+      this.http.post<{ token: string }>("http://localhost:3333/login", {user: usuario.nom, password: usuario.passwd})
+        .pipe(
         catchError((error: HttpErrorResponse) => {
 
           if (error.status === 401) {
@@ -154,5 +155,21 @@ export class UsuarisService {
 
     }
     localStorage.setItem('usuaris',JSON.stringify(usuaris));
+  }
+  recarregarDadesUsuariActiu():void {
+
+  }
+
+  verificarToken()  {
+    const headers = new HttpHeaders({Authorization: `Bearer ${sessionStorage.getItem('token')}`});
+    return new Promise<void>((resolve, reject) => {
+      this.http.post<any>("http://localhost:3333/verificar",{token: sessionStorage.getItem('token')},{headers}).subscribe(
+        (response) => {
+          console.log(response)
+          resolve();
+        }
+
+      )
+    })
   }
 }
