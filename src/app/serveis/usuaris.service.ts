@@ -189,4 +189,14 @@ export class UsuarisService {
 
 
   }
+
+  modificarUsuari(usuari: Usuari){
+   return new Promise<void>(async (resolve, reject) => {
+     if(sessionStorage.getItem('token')) {
+       let token = JSON.parse(sessionStorage.getItem('token')!).token;
+       const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+       this.http.post("http://localhost:3333/modificarUsuari", {user: usuari.nom, email: usuari.correu},{headers}).subscribe();
+     }
+   })
+  }
 }
