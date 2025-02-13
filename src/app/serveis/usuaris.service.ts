@@ -156,20 +156,37 @@ export class UsuarisService {
     }
     localStorage.setItem('usuaris',JSON.stringify(usuaris));
   }
-  recarregarDadesUsuariActiu():void {
+  recarregarDadesUsuariActiu() {
+    if(sessionStorage.getItem('token')) {
+      let token = JSON.parse(sessionStorage.getItem('token')!).token;
+      const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+      return new Promise<Usuari>((resolve, reject) => {
+        this.http.get<any>("http://localhost:3333/obtenir-dades",{headers}).subscribe(data => {
+          resolve(this.parseUsuari(data));
+        })
+      })
+    }
+    return new Promise<Usuari>((resolve, reject) => {return new Usuari("","","")})
 
   }
 
   verificarToken()  {
-    const headers = new HttpHeaders({Authorization: `Bearer ${sessionStorage.getItem('token')}`});
-    return new Promise<void>((resolve, reject) => {
-      this.http.post<any>("http://localhost:3333/verificar",{token: sessionStorage.getItem('token')},{headers}).subscribe(
-        (response) => {
-          console.log(response)
-          resolve();
-        }
+    if(sessionStorage.getItem('token')){
+      let token = JSON.parse(sessionStorage.getItem('token')!).token;
+      const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+      return new Promise<void>((resolve, reject) => {
+        this.http.post<any>("http://localhost:3333/verificar",{},{headers}).subscribe(
+          (response) => {
+            console.log(response)
+            resolve();
+          }
 
-      )
-    })
+        )
+
+      })
+    }
+    return new Promise<void>((resolve, reject) => {});
+
+
   }
 }
