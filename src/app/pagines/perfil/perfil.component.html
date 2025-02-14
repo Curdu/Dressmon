@@ -1,1 +1,31 @@
-<p>perfil works!</p>
+
+<div id="contenidorPerfil">
+  <h1 class="jersey-10-regular" id="titolPerfil">Perfil</h1>
+  <form action="" id="formulariPerfil">
+    <label for="nom">Nom</label>
+    <input type="text" name="nom" id="nom" [(ngModel)]="usuari.nom" placeholder="nom">
+
+    <label for="cognoms">Cognoms</label>
+    <input type="text" name="cognoms" id="cognoms" [(ngModel)]="usuari.cognoms" placeholder="Cognoms">
+
+
+    <label for="passwd">Contrasenya</label>
+    <input type="password" name="passwd" id="passwd" [(ngModel)]="usuari.passwd" placeholder="Contrasenya">
+
+    <label for="email">Correu</label>
+    <input type="email" name="correu" id="email" [(ngModel)]="usuari.correu" placeholder="Correu electrònic">
+
+
+    <label for="telefon">Teléfon</label>
+    <input type="text" name="telefon" id="telefon" [(ngModel)]="usuari.telefon" placeholder="Telefon">
+
+
+
+    <input type="submit" value="Modificar Usuari" (click)="modificarUsuari()">
+  </form>
+</div>
+
+
+
+
+

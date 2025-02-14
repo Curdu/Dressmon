@@ -17,7 +17,6 @@ export class UsuarisService {
 
 
   constructor(private s: ProductesService, private http: HttpClient) {
-    this.getLlistaUsuaris()
     this.getUsuariActiu()
     console.log(this.getUsuariActiu())
   }

@@ -17,7 +17,8 @@ export class NavigationComponent  implements OnInit {
     this.s.verificarToken().then();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.s.recarregarDadesUsuariActiu();
     this.carregarElements()
     this.iniciSessio.addEventListener('mouseover', () => {
       this.iconaUsuari.style.backgroundImage = "url(/assets/iconaUsuariHover.png)"
