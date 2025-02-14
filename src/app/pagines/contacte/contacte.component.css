@@ -3,3 +3,23 @@
   margin-right: 250px;
   margin-left: 250px;
 }
+.topText {
+  margin-top: 50px;
+}
+
+.contactMethod {
+  margin-bottom: 20px;
+}
+
+.bigTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2C3E50;
+  margin-bottom: 10px;
+}
+
+.intro {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #34495E;
+}

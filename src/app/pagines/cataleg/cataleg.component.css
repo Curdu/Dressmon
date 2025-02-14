@@ -36,8 +36,69 @@
 h4{
   text-align: center;
 }
-.boto{
+.boto {
   position: relative;
   margin-left: 350px;
   margin-bottom: 50px;
+
+}
+ body {
+   font-family: Arial, sans-serif;
+   background-color: #f0f0f0;
+   margin: 0;
+   padding: 0;
+ }
+
+.contenedor {
+  padding: 30px;
+  background-color: #ffffff;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+}
+
+.linea {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.producto {
+  text-align: center;
+  width: 100%;
+  max-width: 250px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.productos {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.producto:hover {
+  transform: scale(1.05);
+}
+
+.producto img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+h4 {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
 }
