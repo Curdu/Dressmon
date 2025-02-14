@@ -63,4 +63,19 @@ a{
 a:hover{
   color: white;
 }
+#tancarSessio{
+  width: 75%;
+  height: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 0 3rem ;
+  background: #b20000;
+  color: white;
+  border: white 1px solid;
+  margin-top: 3rem;
+  cursor: pointer;
+}
 
