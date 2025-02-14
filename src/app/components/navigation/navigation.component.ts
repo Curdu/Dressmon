@@ -26,7 +26,9 @@ export class NavigationComponent  implements OnInit {
     this.iniciSessio.addEventListener('mouseout', () => {
       this.iconaUsuari.style.backgroundImage = "url(/assets/iconaUsuari.png)"
     })
-    this.iniciSessio.addEventListener('click', async () => {if(this.s.getUsuariActiu().user === 'null'){
+    this.iniciSessio.addEventListener('click', async () => {
+      console.log('click');
+      if(this.s.getUsuariActiu().user === 'null'){
         await this.router.navigate(['/inicisessio']).then();
 
       }else {
@@ -35,6 +37,16 @@ export class NavigationComponent  implements OnInit {
     })
 
   }
+  async clicarElement() {
+    console.log('click');
+    if(this.s.getUsuariActiu().user === 'null'){
+      await this.router.navigate(['/inicisessio']).then();
+
+    }else {
+      await this.router.navigate(['/perfil']).then();
+    }
+  }
+
 
   carregarElements(): void {
     this.iniciSessio = document.getElementById('usuari')!;

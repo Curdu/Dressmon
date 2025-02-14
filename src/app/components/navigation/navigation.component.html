@@ -23,7 +23,7 @@
       <div class="linia ultima" id="liniaContacte"></div>
     </div>
   </div>
-  <div id="iniciSessio">
+  <div id="iniciSessio" (click)="clicarElement()">
     <a id="usuari">
       @if (s.getUsuariActiu().user !== 'null') {
         {{s.getUsuariActiu().user}}

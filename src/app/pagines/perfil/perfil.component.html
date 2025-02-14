@@ -12,14 +12,12 @@
     <label for="passwd">Contrasenya</label>
     <input type="password" name="passwd" id="passwd" [(ngModel)]="usuari.passwd" placeholder="Contrasenya">
 
-    <label for="email">Correu</label>
-    <input type="email" name="correu" id="email" [(ngModel)]="usuari.correu" placeholder="Correu electrònic">
+    <label for="correu">Correu</label>
+    <input type="email" name="correu" id="correu" [(ngModel)]="usuari.correu" placeholder="Correu electrònic">
 
 
     <label for="telefon">Teléfon</label>
     <input type="text" name="telefon" id="telefon" [(ngModel)]="usuari.telefon" placeholder="Telefon">
-
-
 
     <input type="submit" value="Modificar Usuari" (click)="modificarUsuari()">
   </form>
