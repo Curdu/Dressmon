@@ -1,16 +1,22 @@
 import {Producte} from './Producte';
 
 export class Usuari{
-  nom: string;
+  user: string;
   correu: string;
   passwd: string;
+  telefon?: string;
+  nom: string;
+  cognoms: string;
   cistella: Producte[];
 
-  constructor(nom: string, correu: string, passwd: string) {
-    this.nom = nom;
+  constructor(user: string, nom: string, cognoms: string ,correu: string, passwd: string, telefon? : string) {
+    this.user = user;
     this.correu = correu;
     this.passwd = passwd;
     this.cistella = [];
+    this.telefon = telefon;
+    this.nom = nom;
+    this.cognoms = cognoms;
   }
 
    equals(other: Usuari): boolean {

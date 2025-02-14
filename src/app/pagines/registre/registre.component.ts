@@ -31,7 +31,7 @@ export class RegistreComponent {
   registrarUsuari(){
 
     if(this.esContrasenyaConfirmada() && this.nomCorrecte() && this.correuCorrecte()){
-      if(this.s.registrarUsuari(new Usuari(this.nom, this.correu, this.passwd))){
+      if(this.s.registrarUsuari(new Usuari(this.nom, this.correu, this.passwd,"","",""))){
         this.router.navigate(['inicisessio']);
       }else {
         console.log("Aquest usuari ja existeix")

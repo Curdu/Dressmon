@@ -23,21 +23,12 @@ export class UsuarisService {
   }
 
   registrarUsuari(usuari: Usuari): boolean{
-    let usuaris = this.getLlistaUsuaris();
-    for(const i of usuaris){
-      if (i.equals(usuari)){
-        return false;
-      }
-    }
-    usuaris.push(usuari);
-    localStorage.setItem('usuaris', JSON.stringify(usuaris));
-
-    return true;
+    return false;
   }
 
     iniciarSessio(usuario: Usuari){
     return new Promise<void>(resolve => {
-      this.http.post<{ token: string }>("http://localhost:3333/login", {user: usuario.nom, password: usuario.passwd})
+      this.http.post<{ token: string }>("http://localhost:3333/login", {user: usuario.user, password: usuario.passwd})
         .pipe(
         catchError((error: HttpErrorResponse) => {
 
@@ -80,7 +71,7 @@ export class UsuarisService {
       new Error("El correu és indefinida")
     }
 
-    return new Usuari(data.user,data.email,"");
+    return new Usuari(data.user,data.nom,data.cognoms,data.email,"",data.telefon);
   }
 
   private obtenirPayloadToken(token: string): any {
@@ -95,41 +86,30 @@ export class UsuarisService {
     sessionStorage.setItem(CLAU_USUARI_ACTIU, JSON.stringify(usuariActiu));
   }
   private setUsuariActiu(usuari: any){
-    sessionStorage.setItem(CLAU_USUARI_ACTIU, JSON.stringify(this.parseUsuari(usuari.data)));
+    sessionStorage.setItem(CLAU_USUARI_ACTIU, JSON.stringify(this.parseUsuari(usuari)));
   }
 
 
   public getUsuariActiu(): Usuari{
     if(JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!) != null) {
-      let nom = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).nom;
+      let user = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).user;
       let correu = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).correu;
       let passwd = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).passwd;
-      let usuari : Usuari = new Usuari(nom, correu, passwd);
+      let nom = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).nom;
+      let cognoms = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).cognoms;
+      let telefon = JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).telefon;
+      let usuari : Usuari = new Usuari(user,nom,cognoms,correu,"",telefon);
       usuari.setCistella(this.parseCistella(JSON.parse(sessionStorage.getItem(CLAU_USUARI_ACTIU)!).cistella));
       return usuari;
     }
-    let usuari = new Usuari('null','null','null');
+    let usuari = new Usuari('null','null','null','null','null','null');
     usuari.addProducte(this.s.getProducteById(1)!,1);
     usuari.addProducte(this.s.getProducteById(1)!,3);
     sessionStorage.setItem(CLAU_USUARI_ACTIU,JSON.stringify(usuari));
     return usuari;
   }
 
-  private getLlistaUsuaris(): Usuari[]{
-    let usuaris: Usuari[] = [];
-    if(JSON.parse(localStorage.getItem('usuaris')!) != null){
-      for(let i of JSON.parse(localStorage.getItem('usuaris')!)){
-        let usuari = new Usuari(i.nom,i.correu,i.passwd)
-        usuari.setCistella(i.cistella)
-        usuaris.push(usuari)
-      }
-    }else{
-      localStorage.setItem("usuaris", JSON.stringify([new Usuari('null','null','null')]));
-      usuaris.push(new Usuari('null','null','null'))
-    }
 
-    return usuaris;
-  }
   private parseCistella(cistella: Producte[]): Producte[]{
     let novaCistella: Producte[] = []
     for (let i of cistella) {
@@ -147,14 +127,7 @@ export class UsuarisService {
 
   }
   guardarUsuariLocal():void {
-    let usuaris = this.getLlistaUsuaris();
-    for (let i = 0; i < usuaris.length; i++) {
-      if(usuaris[i].correu === this.getUsuariActiu().correu){
-        usuaris[i] = this.getUsuariActiu();
-      }
 
-    }
-    localStorage.setItem('usuaris',JSON.stringify(usuaris));
   }
   recarregarDadesUsuariActiu() {
     if(sessionStorage.getItem('token')) {
@@ -162,11 +135,12 @@ export class UsuarisService {
       const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
       return new Promise<Usuari>((resolve, reject) => {
         this.http.get<any>("http://localhost:3333/obtenir-dades",{headers}).subscribe(data => {
+          this.setUsuariActiu(data);
           resolve(this.parseUsuari(data));
         })
       })
     }
-    return new Promise<Usuari>((resolve, reject) => {return new Usuari("","","")})
+    return new Promise<Usuari>((resolve, reject) => {return new Usuari("","","","","","")})
 
   }
 
@@ -195,8 +169,22 @@ export class UsuarisService {
      if(sessionStorage.getItem('token')) {
        let token = JSON.parse(sessionStorage.getItem('token')!).token;
        const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
-       this.http.post("http://localhost:3333/modificarUsuari", {user: usuari.nom, email: usuari.correu},{headers}).subscribe();
+       this.http.post("http://localhost:3333/modificarUsuari", {user: usuari.user, email: usuari.correu, telefon: usuari.telefon, nom: usuari.nom, cognoms: usuari.cognoms },{headers}).subscribe();
      }
    })
+  }
+  cambiarContrasenya(contrasenya: string , token: string){
+    return new Promise<void>(async (resolve, reject) => {
+      const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+      this.http.post("http://localhost:3333/modificarContrasenya", {password: contrasenya}, {headers}).subscribe()
+      resolve();
+    })
+  }
+
+  solicitarCanviContrasenya(email: string){
+    return new Promise<void>(async (resolve, reject) => {
+      this.http.post("http://localhost:3333/solicitarCanvi", {email: email}).subscribe()
+      resolve();
+    })
   }
 }

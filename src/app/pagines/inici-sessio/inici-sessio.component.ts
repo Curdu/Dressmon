@@ -25,7 +25,7 @@ export class IniciSessioComponent {
   async iniciSessio(){
     if(this.usuariValid()){
       try{
-        await this.s.iniciarSessio(new Usuari(this.usuari,"",this.passwd)).then();
+        await this.s.iniciarSessio(new Usuari(this.usuari,"","","",this.passwd,"")).then();
         await this.router.navigate(['/']);
 
 
