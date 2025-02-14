@@ -168,7 +168,7 @@ export class UsuarisService {
      if(sessionStorage.getItem('token')) {
        let token = JSON.parse(sessionStorage.getItem('token')!).token;
        const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
-       this.http.post("http://localhost:3333/modificarUsuari", {user: usuari.user, email: usuari.correu, telefon: usuari.telefon, nom: usuari.nom, cognoms: usuari.cognoms },{headers}).subscribe();
+       this.http.post("http://localhost:3333/modificarUsuari", {user: usuari.user, email: usuari.correu, telefon: usuari.telefon, nom: usuari.nom, cognoms: usuari.cognoms, password: usuari.passwd },{headers}).subscribe();
      }
    })
   }

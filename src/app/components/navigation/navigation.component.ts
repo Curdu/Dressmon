@@ -26,12 +26,11 @@ export class NavigationComponent  implements OnInit {
     this.iniciSessio.addEventListener('mouseout', () => {
       this.iconaUsuari.style.backgroundImage = "url(/assets/iconaUsuari.png)"
     })
-    this.iniciSessio.addEventListener('click', async () => {
-      if(this.s.getUsuariActiu().nom === 'null'){
-        await this.router.navigate(['/inicisessio']);
+    this.iniciSessio.addEventListener('click', async () => {if(this.s.getUsuariActiu().user === 'null'){
+        await this.router.navigate(['/inicisessio']).then();
 
       }else {
-        await this.router.navigate(['/perfil']);
+        await this.router.navigate(['/perfil']).then();
       }
     })
 
