@@ -1,0 +1,15 @@
+<div id="contenidorCanviar">
+  <h1 class="jersey-10-regular" id="titolCanviar">Introdueix la nova contrasenya</h1>
+  <form action="" id="formulariCanviar">
+    <label for="passwd1">Correu</label>
+    <input type="password" name="password" id="passwd1" [(ngModel)]="contrasenya" placeholder="Contrasenya">
+
+    <label for="passwd2">Repeteix la contrasenya</label>
+    <input type="password" name="passwordrepe" id="passwd2" [(ngModel)]="contrasenyaRepe" placeholder="Repeteix la contrasenya">
+
+    <input type="submit" value="Canvia la contrasenya" (click)="canviarContrasena()">
+
+
+  </form>
+
+</div>
