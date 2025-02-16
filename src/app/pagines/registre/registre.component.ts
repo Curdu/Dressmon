@@ -10,14 +10,18 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   templateUrl: './registre.component.html',
+  standalone: true,
   styleUrl: './registre.component.css'
 })
 export class RegistreComponent {
 
-  nom : string;
+  usuari : string;
   correu: string;
   passwd: string;
   passwdConfirm : string;
+  nom: string;
+  cognom: string;
+  telefon: string;
 
   constructor(private router: Router, private s: UsuarisService) {
 
@@ -25,12 +29,15 @@ export class RegistreComponent {
     this.correu = "";
     this.passwd = "";
     this.passwdConfirm  = "";
+    this.usuari = "";
+    this.cognom = "";
+    this.telefon = "";
 
   }
 
   async registrarUsuari() {
     if (this.esContrasenyaConfirmada() && this.nomCorrecte() && this.correuCorrecte()) {
-      const registroExitoso = await this.s.registrarUsuari(this.correu, this.passwd);
+      const registroExitoso = await this.s.registrarUsuari(this.usuari,this.correu, this.passwd, this.nom, this.cognom, this.telefon);
       if (registroExitoso) {
         this.router.navigate(['inicisessio']);
       } else {

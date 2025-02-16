@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
     FormsModule
   ],
   templateUrl: './inici-sessio.component.html',
+  standalone: true,
   styleUrl: './inici-sessio.component.css'
 })
 export class IniciSessioComponent {
@@ -23,7 +24,7 @@ export class IniciSessioComponent {
   }
 
   iniciSessio(): void{
-    if(this.s.iniciarSessio(new Usuari("",this.correu,this.passwd))){
+    if(this.s.iniciarSessio(new Usuari("", this.correu, this.passwd, "", "", ""))){
       console.log("Inici de sessió correcte")
       this.router.navigate(["/inici"])
     }else{
