@@ -13,7 +13,7 @@ const CLAU_USUARI_ACTIU: string = "usuariActiu";
   providedIn: 'root'
 })
 export class UsuarisService {
-  private apiUrl: string = 'http://localhost:3333';
+  private apiUrl: string = 'http://172.16.1.1:3333';
 
 
 
@@ -40,7 +40,7 @@ export class UsuarisService {
 
     iniciarSessio(usuario: Usuari){
     return new Promise<void>(resolve => {
-      this.http.post<{ token: string }>("http://localhost:3333/login", {user: usuario.user, password: usuario.passwd})
+      this.http.post<{ token: string }>(`${this.apiUrl}/login`, {user: usuario.user, password: usuario.passwd})
         .pipe(
         catchError((error: HttpErrorResponse) => {
 
@@ -146,7 +146,7 @@ export class UsuarisService {
       let token = JSON.parse(sessionStorage.getItem('token')!).token;
       const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
       return new Promise<Usuari>((resolve, reject) => {
-        this.http.get<any>("http://localhost:3333/obtenir-dades",{headers}).subscribe(data => {
+        this.http.get<any>(`${this.apiUrl}/obtenir-dades`,{headers}).subscribe(data => {
           this.setUsuariActiu(data);
           resolve(this.parseUsuari(data));
         })
@@ -161,7 +161,7 @@ export class UsuarisService {
       let token = JSON.parse(sessionStorage.getItem('token')!).token;
       const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
       return new Promise<void>((resolve, reject) => {
-        this.http.post<any>("http://localhost:3333/verificar",{},{headers}).subscribe(
+        this.http.post<any>(`${this.apiUrl}/verificar`,{},{headers}).subscribe(
           (response) => {
             console.log(response)
             resolve();
@@ -181,21 +181,21 @@ export class UsuarisService {
      if(sessionStorage.getItem('token')) {
        let token = JSON.parse(sessionStorage.getItem('token')!).token;
        const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
-       this.http.post("http://localhost:3333/modificarUsuari", {user: usuari.user, email: usuari.correu, telefon: usuari.telefon, nom: usuari.nom, cognoms: usuari.cognoms, password: usuari.passwd },{headers}).subscribe();
+       this.http.post(`${this.apiUrl}/modificarUsuari`, {user: usuari.user, email: usuari.correu, telefon: usuari.telefon, nom: usuari.nom, cognoms: usuari.cognoms, password: usuari.passwd },{headers}).subscribe();
      }
    })
   }
   cambiarContrasenya(contrasenya: string , token: string){
     return new Promise<void>(async (resolve, reject) => {
       const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
-      this.http.post("http://localhost:3333/modificarContrasenya", {password: contrasenya}, {headers}).subscribe()
+      this.http.post(`${this.apiUrl}/modificarContrasenya`, {password: contrasenya}, {headers}).subscribe()
       resolve();
     })
   }
 
   solicitarCanviContrasenya(email: string){
     return new Promise<void>(async (resolve, reject) => {
-      this.http.post("http://localhost:3333/solicitarCanvi", {email: email}).subscribe()
+      this.http.post(`${this.apiUrl}/solicitarCanvi`, {email: email}).subscribe()
       resolve();
     })
   }
