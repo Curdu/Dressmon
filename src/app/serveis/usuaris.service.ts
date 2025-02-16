@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UsuarisService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3333';
   private usuaris: Usuari[] = [];
 
   constructor(private s: ProductesService, private http: HttpClient) {
