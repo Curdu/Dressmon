@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {UsuarisService} from '../../serveis/usuaris.service';
-import {Usuari} from '../../model/Usuari';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -10,14 +9,18 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   templateUrl: './registre.component.html',
+  standalone: true,
   styleUrl: './registre.component.css'
 })
 export class RegistreComponent {
 
-  nom : string;
+  usuari : string;
   correu: string;
   passwd: string;
   passwdConfirm : string;
+  nom: string;
+  cognom: string;
+  telefon: string;
 
   constructor(private router: Router, private s: UsuarisService) {
 
@@ -25,19 +28,22 @@ export class RegistreComponent {
     this.correu = "";
     this.passwd = "";
     this.passwdConfirm  = "";
+    this.usuari = "";
+    this.cognom = "";
+    this.telefon = "";
 
   }
 
-  registrarUsuari(){
-
-    if(this.esContrasenyaConfirmada() && this.nomCorrecte() && this.correuCorrecte()){
-      if(this.s.registrarUsuari(new Usuari(this.nom, this.correu, this.passwd,"","",""))){
+  async registrarUsuari() {
+    if (this.esContrasenyaConfirmada() && this.nomCorrecte() && this.correuCorrecte()) {
+      const registroExitoso = await this.s.registrarUsuari(this.usuari,this.correu, this.passwd, this.nom, this.cognom, this.telefon);
+      if (registroExitoso) {
         this.router.navigate(['inicisessio']);
-      }else {
-        console.log("Aquest usuari ja existeix")
+      } else {
+        console.log("Aquest usuari ja existeix o hi ha un error en el registre");
       }
-    }else{
-      console.log("Les contrasenyes no coincideixen")
+    } else {
+      console.log("Les contrasenyes no coincideixen o hi ha un error");
     }
   }
 

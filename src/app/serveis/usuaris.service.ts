@@ -13,6 +13,7 @@ const CLAU_USUARI_ACTIU: string = "usuariActiu";
   providedIn: 'root'
 })
 export class UsuarisService {
+  private apiUrl: string = 'http://localhost:3333';
 
 
 
@@ -21,8 +22,20 @@ export class UsuarisService {
     console.log(this.getUsuariActiu())
   }
 
-  registrarUsuari(usuari: Usuari): boolean{
-    return false;
+  async registrarUsuari(user: string, correu: string, passwd: string, nom: string, cognoms: string, telefon: string): Promise<boolean> {
+    try {
+      const existeix = await this.http.post<any>(`${this.apiUrl}/comprovar`, { user, correu }).toPromise();
+      if (existeix.existeix) {
+        console.error("Usuari o correu ja existeixen");
+        return false;
+      }
+      const response = await this.http.post<any>(`${this.apiUrl}/registra`, { user, nom, cognoms, correu, passwd, telefon }).toPromise();
+      console.log("Usuari registrat:", response);
+      return true;
+    } catch (error: any) {
+      console.error("Error en el registre:", error.message);
+      return false;
+    }
   }
 
     iniciarSessio(usuario: Usuari){

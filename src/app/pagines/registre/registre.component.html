@@ -1,11 +1,20 @@
 <div id="contenidorRegistre">
   <h1 id="titolRegistrar">Registra't </h1>
   <form action="" method="post" id="formulariRegistre">
-    <label for="nom">Nom d'usuari</label>
-    <input type="text" name="nom" id="nom" [(ngModel)]="nom" placeholder="Nom d'usuari" required>
+    <label for="usuari">Nom d'usuari</label>
+    <input type="text" name="usuari" id="usuari" [(ngModel)]="usuari" placeholder="Nom d'usuari" required>
 
     <label for="correu">Correu electrònic</label>
     <input type="email" name="correu" id="correu" [(ngModel)]="correu" placeholder="Correu electrònic" required>
+
+    <label for="nom">Nom</label>
+    <input type="text" name="nom" id="nom" [(ngModel)]="nom" placeholder="Nom" required>
+
+    <label for="cognom">Cognom</label>
+    <input type="text" name="cognom" id="cognom" [(ngModel)]="cognom" placeholder="Cognom" required>
+
+    <label for="telefon">Telefon</label>
+    <input type="text" name="telefon" id="telefon" [(ngModel)]="telefon" placeholder="Telefon" required>
 
     <label for="passwd">Contrasenya</label>
     <input type="password" name="passwd" id="passwd" [(ngModel)]="passwd" placeholder="Contrasenya" required>
